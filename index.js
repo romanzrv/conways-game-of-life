@@ -9,10 +9,12 @@ export const cells = [
 
 export const killCell = (x, y) => {
     cells[y - 1][x - 1].alive = false;
+    document.getElementById(`${x}${y}`).style.backgroundColor = 'white';
 };
 
 export const aliveCell = (x, y) => {
     cells[y - 1][x - 1].alive = true;
+    document.getElementById(`${x}${y}`).style.backgroundColor = 'black';
 };
 
 export const getAliveNeighboursCells = (x, y) => {
