@@ -23,3 +23,9 @@ test('The aliveCell method should set the "alive" value to "true" for a specific
     index.aliveCell(1, 1);
     expect(index.cells[0][0].alive).toBe(true);
 });
+
+test('The "getAliveNeighboursCells" should return a valid number of neighbours alive cells', () => {
+    index.aliveCell(1, 2);
+    index.aliveCell(2, 2);
+    expect(index.getAliveNeighboursCells(1, 1)).toBe(2);
+});

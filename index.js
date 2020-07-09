@@ -8,9 +8,22 @@ export const cells = [
 ];
 
 export const killCell = (x, y) => {
-    cells[x - 1][y - 1].alive = false;
+    cells[y - 1][x - 1].alive = false;
 };
 
 export const aliveCell = (x, y) => {
-    cells[x - 1][y - 1].alive = true;
+    cells[y - 1][x - 1].alive = true;
+};
+
+export const getAliveNeighboursCells = (x, y) => {
+  let aliveNeighboursCells = 0;
+  aliveNeighboursCells = cells[y - 1] ? (cells[y - 1][x - 2] ? (cells[y - 1][x - 2].alive ? aliveNeighboursCells + 1 : aliveNeighboursCells) : aliveNeighboursCells) : aliveNeighboursCells;
+  aliveNeighboursCells = cells[y - 2] ? (cells[y - 2][x - 2] ? (cells[y - 2][x - 2].alive ? aliveNeighboursCells + 1 : aliveNeighboursCells) : aliveNeighboursCells) : aliveNeighboursCells;
+  aliveNeighboursCells = cells[y - 2] ? (cells[y - 2][x - 1] ? (cells[y - 2][x - 1].alive ? aliveNeighboursCells + 1 : aliveNeighboursCells) : aliveNeighboursCells) : aliveNeighboursCells;
+  aliveNeighboursCells = cells[y - 2] ? (cells[y - 2][(x - 1) + 1] ? (cells[y - 2][(x - 1) + 1].alive ? aliveNeighboursCells + 1 : aliveNeighboursCells) : aliveNeighboursCells) : aliveNeighboursCells;
+  aliveNeighboursCells = cells[y - 1] ? (cells[y - 1][(x - 1) + 1] ? (cells[y - 1][(x - 1) + 1].alive ? aliveNeighboursCells + 1 : aliveNeighboursCells) : aliveNeighboursCells) : aliveNeighboursCells;
+  aliveNeighboursCells = cells[(y - 1) + 1] ? (cells[(y - 1) + 1][(x - 1) + 1] ? (cells[(y - 1) + 1][(x - 1) + 1].alive ? aliveNeighboursCells + 1 : aliveNeighboursCells) : aliveNeighboursCells) : aliveNeighboursCells;
+  aliveNeighboursCells = cells[(y - 1) + 1] ? (cells[(y - 1) + 1][x - 1] ? (cells[(y - 1) + 1][x - 1].alive ? aliveNeighboursCells + 1 : aliveNeighboursCells) : aliveNeighboursCells) : aliveNeighboursCells;
+  aliveNeighboursCells = cells[(y - 1) + 1] ? (cells[(y - 1) + 1][x - 2] ? (cells[(y - 1) + 1][x - 2].alive ? aliveNeighboursCells + 1 : aliveNeighboursCells) : aliveNeighboursCells) : aliveNeighboursCells;
+  return aliveNeighboursCells;
 };
