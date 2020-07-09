@@ -1,5 +1,12 @@
-import {test, expect} from "@jest/globals";
+import {test, expect, beforeEach} from "@jest/globals";
 import * as index from "../index";
+
+beforeEach(() => {
+    index.killCell(1, 1);
+    index.killCell(1, 2);
+    index.killCell(2, 2);
+    index.killCell(2, 1);
+});
 
 test('The Y axis length should be 6', () => {
     expect(index.cells.length).toBe(6);
