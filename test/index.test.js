@@ -29,3 +29,28 @@ test('The "getAliveNeighboursCells" should return a valid number of neighbours a
     index.aliveCell(2, 2);
     expect(index.getAliveNeighboursCells(1, 1)).toBe(2);
 });
+
+test('A dead cell with 3 alive neighbours cells should be alive', () => {
+    index.killCell(1, 1);
+    index.aliveCell(1, 2);
+    index.aliveCell(2, 2);
+    index.aliveCell(2, 1);
+    index.checkAndSetCellStatus(1, 1);
+    expect(index.cells[0][0].alive).toBe(true);
+});
+
+test('A alive cell with 2 or 3 alive neighbours cells should be alive', () => {
+    index.aliveCell(1, 1);
+    index.aliveCell(1, 2);
+    index.aliveCell(2, 2);
+    index.aliveCell(2, 1);
+    index.checkAndSetCellStatus(1, 1);
+    expect(index.cells[0][0].alive).toBe(true);
+});
+
+test('A alive cell with 1 alive neighbours cells should be dead', () => {
+    index.aliveCell(1, 1);
+    index.aliveCell(1, 2);
+    index.checkAndSetCellStatus(1, 1);
+    expect(index.cells[0][0].alive).toBe(false);
+});

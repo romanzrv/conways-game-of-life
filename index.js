@@ -9,12 +9,12 @@ export const cells = [
 
 export const killCell = (x, y) => {
     cells[y - 1][x - 1].alive = false;
-    document.getElementById(`${x}${y}`).style.backgroundColor = 'white';
+    document.getElementById(`${x}${y}`) ? document.getElementById(`${x}${y}`).style.backgroundColor = 'white' : null;
 };
 
 export const aliveCell = (x, y) => {
     cells[y - 1][x - 1].alive = true;
-    document.getElementById(`${x}${y}`).style.backgroundColor = 'black';
+    document.getElementById(`${x}${y}`) ? document.getElementById(`${x}${y}`).style.backgroundColor = 'black' : null;
 };
 
 export const getAliveNeighboursCells = (x, y) => {
@@ -29,3 +29,17 @@ export const getAliveNeighboursCells = (x, y) => {
   aliveNeighboursCells = cells[(y - 1) + 1] ? (cells[(y - 1) + 1][x - 2] ? (cells[(y - 1) + 1][x - 2].alive ? aliveNeighboursCells + 1 : aliveNeighboursCells) : aliveNeighboursCells) : aliveNeighboursCells;
   return aliveNeighboursCells;
 };
+
+export const checkAndSetCellStatus = (x, y) => {
+    if (cells[y - 1][x - 1].alive) {
+        if (getAliveNeighboursCells(x, y) === 2 || getAliveNeighboursCells(x, y) === 3) {
+            aliveCell(x, y);
+        } else {
+            killCell(x, y);
+        }
+    } else {
+        if (getAliveNeighboursCells(x, y) === 3) {
+            aliveCell(x, y);
+        }
+    }
+}
