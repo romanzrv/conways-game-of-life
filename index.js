@@ -30,16 +30,18 @@ const getAliveNeighboursCells = (x, y) => {
   return aliveNeighboursCells;
 };
 
-const checkAndSetCellStatus = (x, y) => {
-    if (cells[y - 1][x - 1].alive) {
-        if (getAliveNeighboursCells(x, y) === 2 || getAliveNeighboursCells(x, y) === 3) {
-            aliveCell(x, y);
+const checkAndSetCellStatus = (cell) => {
+    if (cells[cell.y - 1][cell.x - 1].alive) {
+        if (getAliveNeighboursCells(cell.x, cell.y) === 2 || getAliveNeighboursCells(cell.x, cell.y) === 3) {
+            cell.isAliveNextIteration = true;
         } else {
-            killCell(x, y);
+            cell.isAliveNextIteration = false;
         }
     } else {
-        if (getAliveNeighboursCells(x, y) === 3) {
-            aliveCell(x, y);
+        if (getAliveNeighboursCells(cell.x, cell.y) === 3) {
+            cell.isAliveNextIteration = true;
+        } else {
+            cell.isAliveNextIteration = false;
         }
     }
 }
@@ -47,16 +49,25 @@ const checkAndSetCellStatus = (x, y) => {
 const iterateThroughCells = () => {
     cells.forEach((valueY) => {
         valueY.forEach((valueX) => {
-            checkAndSetCellStatus(valueX.x, valueX.y);
+            checkAndSetCellStatus(valueX);
         })
-    })
+    });
+
+    cells.forEach((valueY) => {
+        valueY.forEach((valueX) => {
+            if (valueX.isAliveNextIteration) {
+                aliveCell(valueX.x, valueX.y);
+            } else {
+                killCell(valueX.x, valueX.y);
+            }
+        })
+    });
 }
 
-aliveCell(2, 3);
 aliveCell(3, 3);
 aliveCell(4, 3);
-aliveCell(4, 4);
+aliveCell(5, 3);
 
 setInterval(() => {
     iterateThroughCells();
-}, 1000);
+}, 1500);
