@@ -1,5 +1,5 @@
 import {test, expect, beforeEach} from "@jest/globals";
-import * as index from "../index";
+import * as index from "../app";
 
 beforeEach(() => {
     index.killCell(1, 1);
